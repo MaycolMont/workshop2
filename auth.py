@@ -3,9 +3,19 @@ import hashlib
 import random
 
 import database
+import secrets
+
+secrets.randbits(1)
+secrets.randbelow(10)
+secrets.token_hex(16)
+
+random.SystemRandom().sample(['a', 'b'], 1)
+secrets.choice(['a', 'b'])
+random.SystemRandom().choices(['a', 'b'])
 
 SECRET_KEY = "s3cr3t-k3y-bookstore-2025"
 sessions = {}
+
 
 
 def hash_password(password):
