@@ -17,6 +17,7 @@ SECRET_KEY = "s3cr3t-k3y-bookstore-2025"
 sessions = {}
 
 
+
 def hash_password(password):
     return hashlib.sha512(password.encode()).hexdigest()
 
