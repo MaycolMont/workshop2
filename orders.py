@@ -3,6 +3,7 @@ import database
 import auth
 
 TAX = 0.15
+bars = "=" * 30
 
 
 def process_order(token, items, coupon=None, shipping="standard", log=[]):
@@ -33,11 +34,8 @@ def process_order(token, items, coupon=None, shipping="standard", log=[]):
                 total = total * 0.9
             elif coupon == "BLACKFRIDAY":
                 total = total * 0.5
-            elif coupon == "STAFF":
-                if auth.is_admin(token):
-                    total = total * 0.7
-                else:
-                    total = total * 0.7
+            elif coupon == "STAFF" and auth.is_admin(token):
+                total = total * 0.7
         if shipping == "express":
             total = total + 10
         elif shipping == "standard":
@@ -53,10 +51,10 @@ def process_order(token, items, coupon=None, shipping="standard", log=[]):
 
 
 def print_invoice(username, items):
-    print("==============================")
+    print(bars)
     print("BOOKSTORE INVOICE")
     print("Customer: " + username)
-    print("==============================")
+    print(bars)
     subtotal = 0
     for item in items:
         book = database.get_book(item["book_id"])
@@ -67,14 +65,15 @@ def print_invoice(username, items):
     print("Subtotal: " + str(round(subtotal, 2)))
     print("Tax: " + str(round(tax, 2)))
     print("Total: " + str(round(subtotal + tax, 2)))
-    print("==============================")
+    print(bars)
 
 
 def print_quote(username, items):
-    print("==============================")
+    bars = "=" * 30
+    print(bars)
     print("BOOKSTORE QUOTE")
     print("Customer: " + username)
-    print("==============================")
+    print(bars)
     subtotal = 0
     for item in items:
         book = database.get_book(item["book_id"])
@@ -86,7 +85,7 @@ def print_quote(username, items):
     print("Tax: " + str(round(tax, 2)))
     print("Total: " + str(round(subtotal + tax, 2)))
     print("This quote is valid for 7 days.")
-    print("==============================")
+    print(bars)
 
 
 def cancel_order(order_id):
