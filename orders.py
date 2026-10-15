@@ -9,7 +9,7 @@ bars = "=" * 30
 def process_order(token, items, coupon=None, shipping="standard", log=[]):
     username = auth.sessions.get(token)
     if username != None:
-        if items is []:
+        if items == []:
             print("Empty order")
             return None
         total = 0
